@@ -51,42 +51,47 @@
                                 </div>
                                 <div class="form-group">
                                     <div> Name your Campaign</div>
-                                    <input type="text" name="campaignName" id="campaignName" class="form-control" placeholder="Enter Your Campaign Name">
+                                    <input type="text" name="campaignName" id="campaignName" class="form-control" placeholder="Enter Your Campaign Name" onkeyup="removeInvalidClass(this)">
+                                    <div class="invalid-feedback"> Please provide a campaign name.</div>
                                 </div>
                                 <div class="form-group">
                                     <div>City</div>
-                                    <select id="city" name="city" class="custom-select" onchange="addLocality()">
+                                    <select id="city" name="city" class="custom-select" onchange="addLocality(this)">
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a City.</div>
                                 </div>
                                 <div class="form-group">
                                     <div>Locality</div>
-                                    <select id="locality" name="locality" class="custom-select" onchange="addSubLocality()">
+                                    <select id="locality" name="locality" class="custom-select" onchange="addSubLocality(this)">
                                         <option value="">Choose City First...</option>
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a Locality.</div>
                                 </div>
                                 <div class="form-group">
                                     <div>Sub Locality</div>
-                                    <select id="subLocality" name="subLocality" class="custom-select">
+                                    <select id="subLocality" name="subLocality" class="custom-select" onchange="removeInvalidClass(this)">
                                         <option value="">Choose Locality First...</option>
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a Sub Locality.</div>
                                 </div>
                                 <div class="form-group">
                                     <div>Category</div>
-                                    <select id="category" name="category" class="custom-select" onchange="addSubCategory()">
+                                    <select id="category" name="category" class="custom-select" onchange="addSubCategory(this)">
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a Category.</div>
                                 </div>
                                 <div class="form-group">
                                     <div>Sub Category</div>
-                                    <select id="subCategory" name="subCategory" class="custom-select">
+                                    <select id="subCategory" name="subCategory" class="custom-select" onchange="removeInvalidClass(this)">
                                         <option value="">Choose Category First...</option>
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a Sub Category.</div>
                                 </div>
-                                <div id="smallForm1" class="form-group tz-small" style="display:none">Please Fill up the Form</div>
                                 <div class="form-group tz-nextprevdiv" style="justify-content: space-around">
                                     <button type="button" class="btn-primary form-control tz-nextbtn" onclick="goToStep2()">Next</button>
                                 </div>
                             </div>
-                            <div id="campaignForm2" style="display: none">
+                            <div id="campaignForm2" style="display: block">
                                 <div class="tz-campaignHeading">
                                         <div class="tz-stepCircle">
                                             <div class="tz-arc tz-arc1"></div>
@@ -100,12 +105,36 @@
                                     </div>
                                 <div class="form-group">
                                     <div>Footer Size</div>
-                                    <select id="footerSize" name="footerSize" class="custom-select" onchange="footerSizeChange()">
+                                    <select id="footerSize" name="footerSize" class="custom-select" onchange="footerSizeChange(this)">
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a Size of Footer.</div>
+                                </div>
+                                <div class="form-group" >
+                                    <div>Footer Preview</div>
+                                    
+                                    <!-- <div class="tz-footerContainer" style="background: darkgrey">
+                                        <img src="/paytm.jpeg" class="tz-itemCenter tz-footer-logo">
+                                        <div class="tz-itemCenter tz-footer-brandName tz-footer-fontSize-3" style="background:blanchedalmond">Campaign Name</div>
+                                        <div class="tz-itemCenter tz-footer-tagline tz-footer-fontSize-2" style="background: paleturquoise">Tagline</div>
+                                        <div class="tz-itemCenter tz-footer-info1 tz-footer-fontSize-1" style="background: honeydew">Info 1</div>
+                                        <div class="tz-itemCenter tz-footer-info2 tz-footer-fontSize-1" style="background: palegoldenrod">Info 2</div>
+                                        <div class="tz-itemCenter tz-footer-extraImage" style="background:greenyellow">extraImage</div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br> -->
+                                    <div id="footerContainer" class="tz-footerContainer">
+                                        <img id="fLogoImg" src="" class="tz-itemCenter tz-footer-logo" >
+                                        <div id="fBrandName" class="tz-itemCenter tz-footer-brandName tz-footer-fontSize-3">Brand Name</div>
+                                        <div id="fTagline" class="tz-itemCenter tz-footer-tagline tz-footer-fontSize-2">Your tagline will be</div>
+                                        <div id="fInfo1" class="tz-itemCenter tz-footer-info1 tz-footer-fontSize-1">Info 1</div>
+                                        <div id="fInfo2" class="tz-itemCenter tz-footer-info2 tz-footer-fontSize-1">Info 2</div>
+                                        <img id="fExtraImg" class="tz-itemCenter tz-footer-extraImage" src="" >
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div>Your Footer</div>
-                                    <div class="form-control" style="height:auto;">
+                                    <div id="footerType" class="form-control" style="height:auto;">
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="footerType1" name="footerType" class="custom-control-input" value="UF" onchange="showFooterForm();">
                                             <label class="custom-control-label" for="footerType1">Upload Footer</label>
@@ -115,50 +144,71 @@
                                             <label class="custom-control-label" for="footerType2">Generate Footer on Web</label>
                                         </div>
                                     </div>
+                                    <div class="invalid-feedback"> Please Select the Type of Footer.</div>
                                 </div>
                                 <div class="form-group" id="footerTypeDiv1" style="display: none;">
                                     <div>Upload Footer File</div>
-                                    <label class="form-control text-truncate" for="footerFile">
+                                    <label id="lblFooterFile" class="form-control text-truncate" for="footerFile">
                                         <span><i class="fa fa-paperclip" aria-hidden="true"></i></span>
                                         <span id="footerFileSpan">Upload File</span>
-                                        <input type="file"  id="footerFile" name="footerFile" style="display: none;" onchange = "footerFileChange()">
+                                        <input type="file"  id="footerFile" name="footerFile" style="display: none;" onchange = "footerFileChange()" accept="image/x-png,image/jpeg">
                                     </label>
+                                    <div class="invalid-feedback"> Please provide a Footer File.</div>
                                 </div>
                                 <div id="footerTypeDiv2" style="display: none;">
                                     <div id = "divLogoFile" class="form-group">
                                         <div>Logo</div>
-                                        <label class="form-control text-truncate" for="logoFile">
+                                        <label id="lblLogoFile" class="form-control text-truncate" for="logoFile">
                                             <span><i class="fa fa-paperclip" aria-hidden="true"></i></span>
                                             <span id="logoFileSpan">Upload Logo</span>
-                                            <input type="file" style="display: none" id="logoFile" name="logoFile" onchange = "logoFileChange()">
+                                            <input type="file" style="display: none" id="logoFile" name="logoFile" onchange = "logoFileChange()" accept="image/x-png,image/jpeg">
                                         </label>
+                                        <div class="invalid-feedback"> Please provide a Logo File.</div>
                                     </div>
                                     <div id = "divBrandName" class="form-group" style="display: none">
                                         <div>Brand Name</div>
-                                        <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Enter Brand/Company Name">
+                                        <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Enter Brand/Company Name" onkeyup="nameChange(this,'fBrandName')">
+                                        <div class="invalid-feedback"> Please provide a Brand Name.</div>
                                     </div>
                                     <div id = "divTagline" class="form-group" style="display: none">
                                         <div>Tagline</div>
-                                        <input type="text" class="form-control" id="tagline" name="tagline" placeholder="Enter Tagline/Slogan">
+                                        <input type="text" class="form-control" id="tagline" name="tagline" placeholder="Enter Tagline/Slogan" onkeyup="nameChange(this,'fTagline')">
+                                        <div class="invalid-feedback"> Please provide a Tagline.</div>
                                     </div>
                                     <div id = "divInfo1" class="form-group" style="display: none">
                                         <div>Info1</div>
-                                        <input type="text" class="form-control" id="info1" name="info1" placeholder="Enter Information(1)"> 
+                                        <input type="text" class="form-control" id="info1" name="info1" placeholder="Enter Information(1)" onkeyup="nameChange(this,'fInfo1')">
+                                        <div class="invalid-feedback"> Please provide an Information1.</div>
                                     </div>
                                     <div id = "divInfo2" class="form-group" style="display: none">
                                         <div>Info2</div>
-                                        <input type="text" class="form-control" id="info2" name="info2" placeholder="Enter Inforamtion(2)">
+                                        <input type="text" class="form-control" id="info2" name="info2" placeholder="Enter Inforamtion(2)" onkeyup="nameChange(this,'fInfo2')">
+                                        <div class="invalid-feedback"> Please provide an Information2.</div>
                                     </div>
                                     <div id = "divExtraImage" class="form-group" style="display: none">
                                         <div>Extra Image</div>
-                                        <label class="form-control text-truncate" for="extraImage">
+                                        <label id="lblExtraImage" class="form-control text-truncate" for="extraImage">
                                             <span><i class="fa fa-paperclip" aria-hidden="true"></i></span>
                                             <span id="extraImageSpan">Upload Image</span>
-                                            <input type="file" style="display: none" id="extraImage" name="extraImage" onchange = "extraImageChange()">
+                                            <input type="file" style="display: none" id="extraImage" name="extraImage" onchange = "extraImageChange()" accept="image/x-png,image/jpeg">
                                         </label>
-                                    </div>  
+                                        <div class="invalid-feedback"> Please provide an Extra Image.</div>
+                                    </div> 
+                                    <div id ="divColor" class="form-group">
+                                        <div>
+                                            <div>Footer Color:</div>
+                                            <label id="lblFooterColor" for="footerColor">
+                                                    <input type="color"  id="footerColor" name="footerColor" value="#ffffff" style="display: none" onchange="colorChange(this,'lblFooterColor','BC')">
+                                            </label> 
+                                        </div>
+                                        <div>
+                                            <div>Font Color:</div>
+                                            <label id="lblFontColor" for="fontColor">
+                                                <input type="color"  id="fontColor" name="footerColor" value="#000000" style="display: none" onchange="colorChange(this,'lblFontColor','FC')">
+                                            </label> 
+                                        </div>
+                                    </div> 
                                 </div>
-                                <div id="smallForm2" class="form-group tz-small" style="display:none">Please Fill up the Form</div>
                                 <div class="form-group tz-nextprevdiv">
                                     <button type="button" class="form-control tz-prevbtn" onclick="goToStep1()">Back</button>
                                     <button type="button" class="btn-primary form-control tz-nextbtn" onclick="goToStep3()">Next</button>
@@ -179,14 +229,14 @@
                                     </div>
                                 <div class="form-group">
                                     <div>Quantity</div>
-                                    <select id="quantity" name="quantity" class="custom-select" onchange="calculatePrice()">
+                                    <select id="quantity" name="quantity" class="custom-select" onchange="quantityCalculate(this)">
                                     </select>
+                                    <div class="invalid-feedback"> Please provide a Quantity.</div>
                                 </div>
                                 <div class="form-group">
                                     <div>Price</div>
                                     <div id ="price" class="form-control">0</div>
                                 </div>
-                                <div id="smallForm3" class="form-group tz-small" style="display:none">Please Fill up the Form</div>
                                 <div class="form-group tz-nextprevdiv">
                                     <button type="button" class="form-control tz-prevbtn" onclick="goToStep2()">Back</button>
                                     <button type="button" class="btn-primary form-control tz-nextbtn" onclick="goToStep4()">Next</button>

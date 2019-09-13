@@ -52,40 +52,40 @@ body{
     justify-content: space-between;
 }
 /*Tabel Campaign CSS */
-.responsive-card-table {
+.tz-responsive-card-table {
     width:100%;
     border:1px solid #000;
     background: #fff;
   }
-  .responsive-card-table th,
-  .responsive-card-table td {
+  .tz-responsive-card-table th,
+  .tz-responsive-card-table td {
     border: 1px solid #000;
     padding:5px;
 }
-.responsive-card-table th{
+.tz-responsive-card-table th{
     background: #eee;
 }
-.responsive-card-table td{
+.tz-responsive-card-table td{
     background: #fff;
     cursor: pointer;
 }
   @media screen and (max-width: 640px) {
-    .responsive-card-table,.responsive-card-table thead, .responsive-card-table tbody,
-    .responsive-card-table tr, .responsive-card-table th, .responsive-card-table td{
+    .tz-responsive-card-table,.tz-responsive-card-table thead, .tz-responsive-card-table tbody,
+    .tz-responsive-card-table tr, .tz-responsive-card-table th, .tz-responsive-card-table td{
         display: block;
         /* float:left;ie9 fix */
         width:100%;
         clear:both;
     }
-    .responsive-card-table thead tr {
+    .tz-responsive-card-table thead tr {
         position: absolute;
         top: -9999em;
         left: -9999em;
     }
-    .responsive-card-table tr{
+    .tz-responsive-card-table tr{
         border: 1px solid #ccc;
     }
-    .responsive-card-table td{
+    .tz-responsive-card-table td{
         padding-left:50%;
         -moz-box-sizing:border-box;
         -webkit-box-sizing:border-box;
@@ -93,7 +93,7 @@ body{
         border: none;
 	    border-bottom: 1px solid #eee;
     }
-    .responsive-card-table td::before{
+    .tz-responsive-card-table td::before{
         content: attr(data-label);
         float:left;
 	    width: 95%;
@@ -213,11 +213,6 @@ body{
     font-size: 12px;
     text-align: right;
 }
-.tz-small{
-    color:red;
-    font-size: 90%;
-    font-weight: 400;
-}
 .tz-nextprevdiv{
     display: flex;
     justify-content: space-between;
@@ -235,6 +230,41 @@ body{
     color:#4285f4;
     border: 1px solid #4285f4;
     background:#fff;
+}
+#divColor{
+    display: flex;
+    justify-content: space-evenly;
+}
+#divColor div{
+    display: flex;
+    align-items: center;
+}
+#divColor div div{
+    display:inline-block;
+    margin-right: 10px;
+    width: 91px;
+}
+#divColor div label{
+    width: 60px;
+    height: 30px;
+    border: 1px solid #ccc;
+    margin: 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+#divColor div:nth-child(1) label{
+    background: #fff
+}
+#divColor div:nth-child(2) label{
+    background: #000
+}
+@media only screen and (max-width: 400px) {
+    #divColor{
+        display: block;
+    }
+    #divColor div:first-child{
+        margin-bottom: 16px;
+    }
 }
 .tz-fontsize14{
     font-size:14px;
@@ -342,4 +372,83 @@ body{
     }
 
 
+}
+/* Footer Preview Design */
+.tz-footerContainer{
+    position: relative;
+    width: 100%;
+    padding-top: 4.91%;
+    background: #fff;
+}
+.tz-itemCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center
+}
+.tz-footer-logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13.740%;
+    height: 100%
+}
+.tz-footer-brandName{
+    position: absolute;
+    top: 0;
+    left: 13.7409%;
+    width: 24.5374%;
+    height: 100%;
+}
+.tz-footer-tagline{
+    position: absolute;
+    top: 0;
+    left: 38.2783%;
+    width: 24.0465%;
+    height: 100%;
+}
+.tz-footer-info1{
+    position: absolute;
+    top: 0;
+    left: 62.3248%;
+    width: 24.0465%;
+    height: 50%
+}
+.tz-footer-info2{
+    position: absolute;
+    top: 50%;
+    left: 62.3248%;
+    width: 24.0465%;
+    height: 50%
+}
+.tz-footer-extraImage{
+position: absolute;
+top: 0;
+right: 0;
+width: 13.740%;
+height: 100%;
+}
+.tz-footer-fontSize-3{
+    font-size: 20px;
+}
+.tz-footer-fontSize-2{
+    font-size: 16px;
+}
+.tz-footer-fontSize-1{
+    font-size: 12px;
+}
+@media only screen and (max-width: 767px) {
+    .tz-footer-fontSize-3{font-size: 15px;}
+    .tz-footer-fontSize-2{font-size: 12px;}
+    .tz-footer-fontSize-1{font-size: 9px;}
+}
+@media only screen and (max-width: 575px) {
+    .tz-footer-fontSize-3{font-size: 2.86vw;}
+    .tz-footer-fontSize-2{font-size: 2.28vw;}
+    .tz-footer-fontSize-1{font-size: 1.71vw;}
+}
+@media only screen and (max-width: 450px) {
+    .tz-footer-fontSize-3{font-size: 2.6vw;}
+    .tz-footer-fontSize-2{font-size: 2.08vw;}
+    .tz-footer-fontSize-1{font-size: 1.56vw;}
 }

@@ -38,7 +38,7 @@ let city = [{
                     {"name":"Nanavali","value":"NA","subLocality":[
                         {"name":"Na1"},{"name":"Na2"},{"name":"Na3"}
                     ]},
-                    {"name":"Ganeshwadi","value":"GA","subLoaclity":[
+                    {"name":"Ganeshwadi","value":"GA","subLocality":[
                         {"name":"Ga1"},{"name":"Ga2"},{"name":"Ga3"}
                     ]}
                 ]
@@ -61,13 +61,13 @@ let category = [{
             }];
     
 let footerSizeRate = [
-                    {"size":"2.8","rate":"1.0"},
-                    {"size":"5.6","rate":"1.2"},
-                    {"size":"8.4","rate":"1.5"},
-                    {"size":"12","rate":"1.8"},
-                    {"size":"14.8","rate":"2.0"},
-                    {"size":"17.6","rate":"2.2"},
-                    {"size":"20.377","rate":"2.5"}
+                    {"size":2.8,"rate":1.0},
+                    {"size":5.6,"rate":1.2},
+                    {"size":8.4,"rate":1.5},
+                    {"size":12,"rate":1.8},
+                    {"size":14.8,"rate":2.0},
+                    {"size":17.6,"rate":2.2},
+                    {"size":20.377,"rate":2.5}
                 ];
 let inputDict ={
     "campaignName":"",
@@ -89,10 +89,10 @@ let inputDict ={
     "price":""
 };
 let quantity = [
-                {"value":"100","rate":"1.5"},
-                {"value":"500","rate":"1.2"},
-                {"value":"1000","rate":"1.0"},
-                {"value":"5000","rate":"0.8"},
+                {"value":100,"rate":1.5},
+                {"value":500,"rate":1.2},
+                {"value":1000,"rate":1.0},
+                {"value":5000,"rate":0.8},
                 ];
 
     let cDropdown = document.querySelector('#city');
@@ -107,7 +107,8 @@ let quantity = [
         cOption.text = city[i].name;
         cDropdown.add(cOption);
     }
-    function addLocality(){
+    function addLocality(element){
+        removeInvalidClass(element);
         let cityVal = document.querySelector("#city").value;
         let lDropdown = document.querySelector("#locality");
         let l = lDropdown.length;
@@ -145,7 +146,8 @@ let quantity = [
             }
         }
     }
-    function addSubLocality(){
+    function addSubLocality(element){
+        removeInvalidClass(element);
         let cityVal = document.querySelector("#city").value;
         let localityVal = document.querySelector("#locality").value;
         let lDropdown = document.querySelector("#subLocality");
@@ -192,7 +194,8 @@ let quantity = [
         caOption.text = category[i].name;
         caDropdown.add(caOption);
     }
-    function addSubCategory(){
+    function addSubCategory(element){
+        removeInvalidClass(element);
         let categoryVal = document.querySelector("#category").value;
         let sDropdown = document.querySelector("#subCategory");
         let l = sDropdown.length;
@@ -248,7 +251,8 @@ let quantity = [
         qOption.value = quantity[i].rate;
         qDropdown.add(qOption);
     }
-    function footerSizeChange(){
+    function footerSizeChange(element){
+        removeInvalidClass(element);
         calculatePrice();
         let footerValue = document.querySelector("#footerSize").value;
         let footerSize;
@@ -257,42 +261,34 @@ let quantity = [
                 footerSize = footerSizeRate[i].size;
             }
         }
-        if(footerSize == '2.8'){
-            document.querySelector('#divBrandName').style.display = "none";
-            document.querySelector('#divInfo1').style.display = "none";
-            document.querySelector('#divInfo2').style.display = "none";
-            document.querySelector('#divTagline').style.display = "none";
-            document.querySelector('#divExtraImage').style.display = "none";
-        }else if(footerSize == '5.6'){
+        if(footerSize > 2.8){
             document.querySelector('#divBrandName').style.display = "block";
-            document.querySelector('#divInfo1').style.display = "none";
-            document.querySelector('#divInfo2').style.display = "none";
-            document.querySelector('#divTagline').style.display = "none";
-            document.querySelector('#divExtraImage').style.display = "none";
-        }else if(footerSize == '8.4'){
-            document.querySelector('#divBrandName').style.display = "block";
-            document.querySelector('#divInfo1').style.display = "block";
-            document.querySelector('#divInfo2').style.display = "none";
-            document.querySelector('#divTagline').style.display = "none";
-            document.querySelector('#divExtraImage').style.display = "none";
-        }else if(footerSize == '12'){
-            document.querySelector('#divBrandName').style.display = "block";
-            document.querySelector('#divInfo1').style.display = "block";
-            document.querySelector('#divInfo2').style.display = "block";
-            document.querySelector('#divTagline').style.display = "none";
-            document.querySelector('#divExtraImage').style.display = "none";
-        }else if(footerSize == '14.8'){
-            document.querySelector('#divBrandName').style.display = "block";
-            document.querySelector('#divInfo1').style.display = "block";
-            document.querySelector('#divInfo2').style.display = "block";
-            document.querySelector('#divTagline').style.display = "block";
-            document.querySelector('#divExtraImage').style.display = "none";
-        }else if(footerSize == '17.6' || footerSize == '20.377'){
-            document.querySelector('#divBrandName').style.display = "block";
-            document.querySelector('#divInfo1').style.display = "block";
-            document.querySelector('#divInfo2').style.display = "block";
-            document.querySelector('#divTagline').style.display = "block";
-            document.querySelector('#divExtraImage').style.display = "block";
+            if(footerSize > 5.6){
+                document.querySelector('#divInfo1').style.display = "block";
+                if(footerSize > 8.4){
+                    document.querySelector('#divInfo2').style.display = "block";
+                    if(footerSize > 12){
+                        document.querySelector('#divTagline').style.display = "block";
+                        if(footerSize > 14.8){
+                            document.querySelector('#divExtraImage').style.display = "block";
+                        }else{
+                            document.querySelector('#divExtraImage').style.display = "none";
+                        }
+                    }else{
+                        document.querySelector('#divTagline').style.display = "none";
+                        document.querySelector('#divExtraImage').style.display = "none";
+                    }
+                }else{
+                    document.querySelector('#divInfo2').style.display = "none";
+                    document.querySelector('#divTagline').style.display = "none";
+                    document.querySelector('#divExtraImage').style.display = "none";
+                }
+            }else{
+                document.querySelector('#divInfo1').style.display = "none";
+                document.querySelector('#divInfo2').style.display = "none";
+                document.querySelector('#divTagline').style.display = "none";
+                document.querySelector('#divExtraImage').style.display = "none";
+            }
         }else{
             document.querySelector('#divBrandName').style.display = "none";
             document.querySelector('#divInfo1').style.display = "none";
@@ -300,6 +296,53 @@ let quantity = [
             document.querySelector('#divTagline').style.display = "none";
             document.querySelector('#divExtraImage').style.display = "none";
         }
+        // if(footerSize == 2.8){
+        //     document.querySelector('#divBrandName').style.display = "none";
+        //     document.querySelector('#divInfo1').style.display = "none";
+        //     document.querySelector('#divInfo2').style.display = "none";
+        //     document.querySelector('#divTagline').style.display = "none";
+        //     document.querySelector('#divExtraImage').style.display = "none";
+        // }else if(footerSize == 5.6){
+        //     document.querySelector('#divBrandName').style.display = "block";
+        //     document.querySelector('#divInfo1').style.display = "none";
+        //     document.querySelector('#divInfo2').style.display = "none";
+        //     document.querySelector('#divTagline').style.display = "none";
+        //     document.querySelector('#divExtraImage').style.display = "none";
+        // }else if(footerSize == 8.4){
+        //     document.querySelector('#divBrandName').style.display = "block";
+        //     document.querySelector('#divInfo1').style.display = "block";
+        //     document.querySelector('#divInfo2').style.display = "none";
+        //     document.querySelector('#divTagline').style.display = "none";
+        //     document.querySelector('#divExtraImage').style.display = "none";
+        // }else if(footerSize == 12){
+        //     document.querySelector('#divBrandName').style.display = "block";
+        //     document.querySelector('#divInfo1').style.display = "block";
+        //     document.querySelector('#divInfo2').style.display = "block";
+        //     document.querySelector('#divTagline').style.display = "none";
+        //     document.querySelector('#divExtraImage').style.display = "none";
+        // }else if(footerSize == 14.8){
+        //     document.querySelector('#divBrandName').style.display = "block";
+        //     document.querySelector('#divInfo1').style.display = "block";
+        //     document.querySelector('#divInfo2').style.display = "block";
+        //     document.querySelector('#divTagline').style.display = "block";
+        //     document.querySelector('#divExtraImage').style.display = "none";
+        // }else if(footerSize == 17.6 || footerSize == '20.377'){
+        //     document.querySelector('#divBrandName').style.display = "block";
+        //     document.querySelector('#divInfo1').style.display = "block";
+        //     document.querySelector('#divInfo2').style.display = "block";
+        //     document.querySelector('#divTagline').style.display = "block";
+        //     document.querySelector('#divExtraImage').style.display = "block";
+        // }else{
+        //     document.querySelector('#divBrandName').style.display = "none";
+        //     document.querySelector('#divInfo1').style.display = "none";
+        //     document.querySelector('#divInfo2').style.display = "none";
+        //     document.querySelector('#divTagline').style.display = "none";
+        //     document.querySelector('#divExtraImage').style.display = "none";
+        // }
+    }
+    function quantityCalculate(element){
+        removeInvalidClass(element);
+        calculatePrice();
     }
     function calculatePrice(){
        let footerRate = document.querySelector('#footerSize').value;
@@ -318,6 +361,7 @@ let quantity = [
     }
 
     function showFooterForm(){
+        document.querySelector('#footerType').classList.remove("is-invalid");
         let footerType1 = document.getElementById('footerType1').checked;
         if(footerType1 == true){
             document.querySelector('#footerTypeDiv1').style.display = "block";
@@ -332,6 +376,7 @@ let quantity = [
     function footerFileChange(){
         let footerFile = document.querySelector('#footerFile');
         if(footerFile.files.length != 0){
+            document.querySelector('#lblFooterFile').classList.remove("is-invalid");
             document.querySelector('#footerFileSpan').innerHTML= footerFile.files[0].name;
         }else{
             document.querySelector('#footerFileSpan').innerHTML = "Upload File";
@@ -341,21 +386,44 @@ let quantity = [
     function logoFileChange(){
         let logoFile = document.querySelector('#logoFile');
         if(logoFile.files.length != 0){
+            document.querySelector('#lblLogoFile').classList.remove("is-invalid");
             document.querySelector('#logoFileSpan').innerHTML= logoFile.files[0].name;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+               $('#fLogoImg').attr('src', e.target.result);
+            }
+           reader.readAsDataURL(logoFile.files[0]);
         }else{
             document.querySelector('#logoFileSpan').innerHTML = "Upload Logo";
         }
     }
-
+    function nameChange(element,id){
+        removeInvalidClass(element);
+        document.getElementById(id).innerHTML = element.value;
+    }
     function extraImageChange(){
         let extraImage = document.querySelector('#extraImage');
         if(extraImage.files.length != 0){
+            document.querySelector('#lblExtraImage').classList.remove("is-invalid");
             document.querySelector('#extraImageSpan').innerHTML= extraImage.files[0].name;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+               $('#fExtraImg').attr('src', e.target.result);
+            }
+           reader.readAsDataURL(extraImage.files[0]);
         }else{
             document.querySelector('#extraImageSpan').innerHTML = "Upload Extra Image";
         }
     }
-    
+    function colorChange(element,id,cType){
+        let color = element.value;
+        document.getElementById(id).style.background = color;
+        if(cType == 'BC'){
+            document.getElementById('footerContainer').style.background = color;
+        }else{
+            document.getElementById('footerContainer').style.color = color;
+        }
+    }
     function showDict(){
         let campaignName = document.querySelector('#campaignName').value;
         let city = document.querySelector('#city').value;
@@ -474,10 +542,16 @@ let quantity = [
        console.log(inputDict);
         
     }
+    function removeInvalidClass(element){
+        if(element.value != ""){
+            element.classList.remove("is-invalid");
+        }else{
+            element.classList.add("is-invalid");
+        }
+    }
     function goToStep1(){
         document.querySelector('#campaignForm1').style.display = "block";
         document.querySelector('#campaignForm2').style.display = "none";
-        // document.querySelector('#campaignForm3').style.display = "none";
     }
     function goToStep2(){
         let campaignName = document.querySelector('#campaignName').value;
@@ -490,11 +564,26 @@ let quantity = [
             document.querySelector('#campaignForm2').style.display = "block";
             document.querySelector('#campaignForm1').style.display = "none";
             document.querySelector('#campaignForm3').style.display = "none";
-            document.querySelector('#smallForm1').style.display = "none";
         }else{
-            document.querySelector('#smallForm1').style.display = "block";
+            if(campaignName == ""){
+                document.querySelector('#campaignName').classList.add("is-invalid");
+            }
+            if(city == ""){
+                document.querySelector('#city').classList.add("is-invalid");
+            }
+            if(locality == ""){
+                document.querySelector('#locality').classList.add("is-invalid");
+            }
+            if(subLocality == ""){
+                document.querySelector('#subLocality').classList.add("is-invalid");
+            }
+            if(category == ""){
+                document.querySelector('#category').classList.add("is-invalid");
+            }
+            if(subCategory == ""){
+                document.querySelector('#subCategory').classList.add("is-invalid");
+            }
         }
-        
     }
     function goToStep3(){
         let footerSize = document.querySelector('#footerSize');
@@ -511,7 +600,6 @@ let quantity = [
             document.querySelector('#campaignForm3').style.display = "block";
             document.querySelector('#campaignForm4').style.display = "none";
             document.querySelector('#campaignForm2').style.display = "none";
-            document.querySelector('#smallForm2').style.display = "none";
             logoFile.value = "";
             document.querySelector('#logoFileSpan').innerHTML = "Upload Logo";
             brandName.value = "";
@@ -531,7 +619,6 @@ let quantity = [
                 document.querySelector('#campaignForm3').style.display = "block";
                 document.querySelector('#campaignForm4').style.display = "none";
                 document.querySelector('#campaignForm2').style.display = "none";
-                document.querySelector('#smallForm2').style.display = "none";
                 footerFile.value = "";
                 document.querySelector('#footerFileSpan').innerHTML = "Upload File";
                 brandName.value = "";
@@ -544,7 +631,6 @@ let quantity = [
                 document.querySelector('#campaignForm3').style.display = "block";
                 document.querySelector('#campaignForm4').style.display = "none";
                 document.querySelector('#campaignForm2').style.display = "none";
-                document.querySelector('#smallForm2').style.display = "none";
                 footerFile.value = "";
                 document.querySelector('#footerFileSpan').innerHTML = "Upload File";
                 info1.value = "";
@@ -556,7 +642,6 @@ let quantity = [
                 document.querySelector('#campaignForm3').style.display = "block";
                 document.querySelector('#campaignForm4').style.display = "none";
                 document.querySelector('#campaignForm2').style.display = "none";
-                document.querySelector('#smallForm2').style.display = "none";
                 footerFile.value = "";
                 document.querySelector('#footerFileSpan').innerHTML = "Upload File";
                 info2.value = "";
@@ -567,7 +652,6 @@ let quantity = [
                 document.querySelector('#campaignForm3').style.display = "block";
                 document.querySelector('#campaignForm4').style.display = "none";
                 document.querySelector('#campaignForm2').style.display = "none";
-                document.querySelector('#smallForm2').style.display = "none";
                 footerFile.value = "";
                 document.querySelector('#footerFileSpan').innerHTML = "Upload File";
                 tagline.value = "";
@@ -577,7 +661,6 @@ let quantity = [
                 document.querySelector('#campaignForm3').style.display = "block";
                 document.querySelector('#campaignForm4').style.display = "none";
                 document.querySelector('#campaignForm2').style.display = "none";
-                document.querySelector('#smallForm2').style.display = "none";
                 footerFile.value = "";
                 document.querySelector('#footerFileSpan').innerHTML = "Upload File";
                 extraImage.value = "";
@@ -586,16 +669,40 @@ let quantity = [
                 document.querySelector('#campaignForm3').style.display = "block";
                 document.querySelector('#campaignForm4').style.display = "none";
                 document.querySelector('#campaignForm2').style.display = "none";
-                document.querySelector('#smallForm2').style.display = "none";
                 footerFile.value = "";
                 document.querySelector('#footerFileSpan').innerHTML = "Upload File";
             }
             else{
-                document.querySelector('#smallForm2').style.display = "block"
+                if(size >= 2.8 && logoFile.files.length != 1){
+                    document.querySelector("#lblLogoFile").classList.add('is-invalid');
+                }
+                if(size >= 5.6 && brandName.value == ""){
+                    brandName.classList.add('is-invalid');
+                }
+                if(size >= 8.4 && info1.value == ""){
+                    info1.classList.add('is-invalid');
+                }
+                if(size >= 12 && info2.value == ""){
+                    info2.classList.add('is-invalid');
+                }
+                if(size >= 14.8 && tagline.value == ""){
+                    tagline.classList.add('is-invalid');
+                }
+                if(size >= 17.6 && extraImage.files.length != 1){
+                    document.querySelector("#lblExtraImage").classList.add('is-invalid');
+                }
             }  
         }
         else{
-            document.querySelector('#smallForm2').style.display = "block"
+            if(footerSize.value == ""){
+                footerSize.classList.add("is-invalid");
+            }
+            if(footerType1.checked != true && footerType2.checked != true){
+                document.querySelector('#footerType').classList.add("is-invalid");
+            }
+            if(footerType1.checked == true && footerFile.files.length != 1){
+                document.querySelector("#lblFooterFile").classList.add('is-invalid');
+            }
         }        
     }
     function goToStep4(){
@@ -616,7 +723,7 @@ let quantity = [
             document.querySelector('#campaignForm5').style.display = "none";
             document.querySelector('#smallForm3').style.display = "none"
         }else{
-            document.querySelector('#smallForm3').style.display = "block"
+            document.querySelector('#quantity').classList.add("is-invalid");
         }
         
     }
