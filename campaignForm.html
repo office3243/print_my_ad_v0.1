@@ -11,7 +11,7 @@
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="css/campaignstyle.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
     <div class="tz-main-body">
@@ -91,7 +91,7 @@
                                     <button type="button" class="btn-primary form-control tz-nextbtn" onclick="goToStep2()">Next</button>
                                 </div>
                             </div>
-                            <div id="campaignForm2" style="display: block">
+                            <div id="campaignForm2" style="display: none">
                                 <div class="tz-campaignHeading">
                                         <div class="tz-stepCircle">
                                             <div class="tz-arc tz-arc1"></div>
@@ -111,25 +111,13 @@
                                 </div>
                                 <div class="form-group" >
                                     <div>Footer Preview</div>
-                                    
-                                    <!-- <div class="tz-footerContainer" style="background: darkgrey">
-                                        <img src="/paytm.jpeg" class="tz-itemCenter tz-footer-logo">
-                                        <div class="tz-itemCenter tz-footer-brandName tz-footer-fontSize-3" style="background:blanchedalmond">Campaign Name</div>
-                                        <div class="tz-itemCenter tz-footer-tagline tz-footer-fontSize-2" style="background: paleturquoise">Tagline</div>
-                                        <div class="tz-itemCenter tz-footer-info1 tz-footer-fontSize-1" style="background: honeydew">Info 1</div>
-                                        <div class="tz-itemCenter tz-footer-info2 tz-footer-fontSize-1" style="background: palegoldenrod">Info 2</div>
-                                        <div class="tz-itemCenter tz-footer-extraImage" style="background:greenyellow">extraImage</div>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br> -->
                                     <div id="footerContainer" class="tz-footerContainer">
-                                        <img id="fLogoImg" src="" class="tz-itemCenter tz-footer-logo" >
-                                        <div id="fBrandName" class="tz-itemCenter tz-footer-brandName tz-footer-fontSize-3">Brand Name</div>
-                                        <div id="fTagline" class="tz-itemCenter tz-footer-tagline tz-footer-fontSize-2">Your tagline will be</div>
-                                        <div id="fInfo1" class="tz-itemCenter tz-footer-info1 tz-footer-fontSize-1">Info 1</div>
-                                        <div id="fInfo2" class="tz-itemCenter tz-footer-info2 tz-footer-fontSize-1">Info 2</div>
-                                        <img id="fExtraImg" class="tz-itemCenter tz-footer-extraImage" src="" >
+                                        <img src="/Default Logo.png" id="fLogoImg" src="" class="tz-itemCenter tz-footer-logo" >
+                                        <div id="fBrandName" class="tz-itemCenter tz-footer-brandName tz-footer-fontSize-6">Brand Name</div>
+                                        <div id="fTagline" class="tz-itemCenter tz-footer-tagline tz-footer-fontSize-4">Your tagline will be</div>
+                                        <div id="fInfo1" class="tz-itemCenter tz-footer-info1 tz-footer-fontSize-2">Info 1</div>
+                                        <div id="fInfo2" class="tz-itemCenter tz-footer-info2 tz-footer-fontSize-2">Info 2</div>
+                                        <img src="/noimages.png" id="fExtraImg" class="tz-itemCenter tz-footer-extraImage" src="" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -169,11 +157,45 @@
                                         <div>Brand Name</div>
                                         <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Enter Brand/Company Name" onkeyup="nameChange(this,'fBrandName')">
                                         <div class="invalid-feedback"> Please provide a Brand Name.</div>
+                                        <div class="form-group" style="margin: 16px 0px 0px 0px;">
+                                            <div>Font Size:</div>
+                                            <div style="display: flex">
+                                                <input type="radio" name="bFontSize" id="bf1" value="1" style="display: none" onchange="fontChange(this,'fBrandName')">
+                                                <label class="col tz-fontSize-Label" id="lbf1" for="bf1">1</label>
+                                                <input type="radio" name="bFontSize" id="bf2" value="2" style="display: none" onchange="fontChange(this,'fBrandName')">
+                                                <label class="col tz-fontSize-Label" id="lbf2" for="bf2">2</label>
+                                                <input type="radio" name="bFontSize" id="bf3" value="3" style="display: none" onchange="fontChange(this,'fBrandName')">
+                                                <label class="col tz-fontSize-Label" id="lbf3" for="bf3">3</label>
+                                                <input type="radio" name="bFontSize" id="bf4" value="4" style="display: none" onchange="fontChange(this,'fBrandName')">
+                                                <label class="col tz-fontSize-Label" id="lbf4" for="bf4">4</label>
+                                                <input type="radio" name="bFontSize" id="bf5" value="5" style="display: none" onchange="fontChange(this,'fBrandName')">
+                                                <label class="col tz-fontSize-Label" id="lbf5" for="bf5">5</label>
+                                                <input type="radio" name="bFontSize" id="bf6" value="6" style="display: none" onchange="fontChange(this,'fBrandName')" checked>
+                                                <label class="col tz-fontSize-Label  tz-fontSize-Label-active" id="lbf6" for="bf6">6</label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div id = "divTagline" class="form-group" style="display: none">
                                         <div>Tagline</div>
                                         <input type="text" class="form-control" id="tagline" name="tagline" placeholder="Enter Tagline/Slogan" onkeyup="nameChange(this,'fTagline')">
                                         <div class="invalid-feedback"> Please provide a Tagline.</div>
+                                        <div class="form-group" style="margin: 16px 0px 0px 0px;">
+                                                <div>Font Size:</div>
+                                                <div style="display: flex">
+                                                    <input type="radio" name="tFontSize" id="tf1" value="1" style="display: none" onchange="fontChange(this,'fTagline')">
+                                                    <label class="col tz-fontSize-Label" id="ltf1" for="tf1">1</label>
+                                                    <input type="radio" name="tFontSize" id="tf2" value="2" style="display: none" onchange="fontChange(this,'fTagline')">
+                                                    <label class="col tz-fontSize-Label" id="ltf2" for="tf2">2</label>
+                                                    <input type="radio" name="tFontSize" id="tf3" value="3" style="display: none" onchange="fontChange(this,'fTagline')">
+                                                    <label class="col tz-fontSize-Label" id="ltf3" for="tf3">3</label>
+                                                    <input type="radio" name="tFontSize" id="tf4" value="4" style="display: none" onchange="fontChange(this,'fTagline')"  checked>
+                                                    <label class="col tz-fontSize-Label tz-fontSize-Label-active" id="ltf4" for="tf4">4</label>
+                                                    <input type="radio" name="tFontSize" id="tf5" value="5" style="display: none" onchange="fontChange(this,'fTagline')">
+                                                    <label class="col tz-fontSize-Label" id="ltf5" for="tf5">5</label>
+                                                    <input type="radio" name="tFontSize" id="tf6" value="6" style="display: none" onchange="fontChange(this,'fTagline')">
+                                                    <label class="col tz-fontSize-Label" id="ltf6" for="tf6">6</label>
+                                                </div>
+                                            </div>
                                     </div>
                                     <div id = "divInfo1" class="form-group" style="display: none">
                                         <div>Info1</div>
@@ -185,6 +207,23 @@
                                         <input type="text" class="form-control" id="info2" name="info2" placeholder="Enter Inforamtion(2)" onkeyup="nameChange(this,'fInfo2')">
                                         <div class="invalid-feedback"> Please provide an Information2.</div>
                                     </div>
+                                    <div id="divInfoFont" class="form-group" style="display: none">
+                                            <div>Font Size:</div>
+                                            <div style="display: flex">
+                                                <input type="radio" name="iFontSize" id="if1" value="1" style="display: none" onchange="infoFontChange(this)">
+                                                <label class="col tz-fontSize-Label" id="lif1" for="if1">1</label>
+                                                <input type="radio" name="iFontSize" id="if2" value="2" style="display: none" onchange="infoFontChange(this)"checked>
+                                                <label class="col tz-fontSize-Label tz-fontSize-Label-active" id="lif2" for="if2">2</label>
+                                                <input type="radio" name="iFontSize" id="if3" value="3" style="display: none" onchange="infoFontChange(this)">
+                                                <label class="col tz-fontSize-Label" id="lif3" for="if3">3</label>
+                                                <input type="radio" name="iFontSize" id="if4" value="4" style="display: none" onchange="infoFontChange(this)"  >
+                                                <label class="col tz-fontSize-Label" id="lif4" for="if4">4</label>
+                                                <input type="radio" name="iFontSize" id="if5" value="5" style="display: none" onchange="infoFontChange(this)">
+                                                <label class="col tz-fontSize-Label" id="lif5" for="if5">5</label>
+                                                <input type="radio" name="iFontSize" id="if6" value="6" style="display: none" onchange="infoFontChange(this)">
+                                                <label class="col tz-fontSize-Label" id="lif6" for="if6">6</label>
+                                            </div>
+                                        </div>
                                     <div id = "divExtraImage" class="form-group" style="display: none">
                                         <div>Extra Image</div>
                                         <label id="lblExtraImage" class="form-control text-truncate" for="extraImage">
@@ -194,18 +233,20 @@
                                         </label>
                                         <div class="invalid-feedback"> Please provide an Extra Image.</div>
                                     </div> 
-                                    <div id ="divColor" class="form-group">
-                                        <div>
-                                            <div>Footer Color:</div>
-                                            <label id="lblFooterColor" for="footerColor">
-                                                    <input type="color"  id="footerColor" name="footerColor" value="#ffffff" style="display: none" onchange="colorChange(this,'lblFooterColor','BC')">
-                                            </label> 
-                                        </div>
-                                        <div>
-                                            <div>Font Color:</div>
-                                            <label id="lblFontColor" for="fontColor">
-                                                <input type="color"  id="fontColor" name="footerColor" value="#000000" style="display: none" onchange="colorChange(this,'lblFontColor','FC')">
-                                            </label> 
+                                    <div id="colorBlock" style="display: none">
+                                        <div id ="divColor" class="form-group">
+                                            <div id="mb16">
+                                                <div>Footer Color:</div>
+                                                <label id="lblFooterColor" for="footerColor">
+                                                        <input type="color"  id="footerColor" name="footerColor" value="#ffffff" style="display: none" onchange="colorChange(this,'lblFooterColor','BC')">
+                                                </label> 
+                                            </div>
+                                            <div>
+                                                <div>Font Color:</div>
+                                                <label id="lblFontColor" for="fontColor">
+                                                    <input type="color"  id="fontColor" name="footerColor" value="#000000" style="display: none" onchange="colorChange(this,'lblFontColor','FC')">
+                                                </label> 
+                                            </div>
                                         </div>
                                     </div> 
                                 </div>
@@ -282,7 +323,7 @@
                                     <span>Price: <span id="spanPrice" class="font-weight-bold"></span></span>
                                 </div>
                                 <div class="form-group tz-nextprevdiv">
-                                    <button type="button" class="form-control tz-prevbtn" onclick="goToStep3()">Back</button>
+                                    <button type="button" class="form-control tz-prevbtn" onclick="goToStep3p()">Back</button>
                                     <button type="button" class="btn-primary form-control tz-nextbtn" onclick="goToStep5()">Next</button>
                                 </div>
                             </div>
@@ -330,6 +371,10 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script type="text/javascript" src="js/campaignform.js"></script>
+     <!-- JSPDF JavaScript -->
+    <script type="text/javascript" src="js/jspdf.min.js"></script>
+     <!-- Html2Canvas JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

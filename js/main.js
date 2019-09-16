@@ -86,7 +86,8 @@ let inputDict ={
     "info2":",",
     "extraImageFile":"",
     "quantity":"",
-    "price":""
+    "price":"",
+    "footer":""
 };
 let quantity = [
                 {"value":100,"rate":1.5},
@@ -263,8 +264,10 @@ let quantity = [
         }
         if(footerSize > 2.8){
             document.querySelector('#divBrandName').style.display = "block";
+            document.querySelector('#colorBlock').style.display = "block";
             if(footerSize > 5.6){
                 document.querySelector('#divInfo1').style.display = "block";
+                document.querySelector('#divInfoFont').style.display = "block";
                 if(footerSize > 8.4){
                     document.querySelector('#divInfo2').style.display = "block";
                     if(footerSize > 12){
@@ -285,60 +288,20 @@ let quantity = [
                 }
             }else{
                 document.querySelector('#divInfo1').style.display = "none";
+                document.querySelector('#divInfoFont').style.display = "none";
                 document.querySelector('#divInfo2').style.display = "none";
                 document.querySelector('#divTagline').style.display = "none";
                 document.querySelector('#divExtraImage').style.display = "none";
             }
         }else{
             document.querySelector('#divBrandName').style.display = "none";
+            document.querySelector('#colorBlock').style.display = "none";
             document.querySelector('#divInfo1').style.display = "none";
+            document.querySelector('#divInfoFont').style.display = "none";
             document.querySelector('#divInfo2').style.display = "none";
             document.querySelector('#divTagline').style.display = "none";
             document.querySelector('#divExtraImage').style.display = "none";
         }
-        // if(footerSize == 2.8){
-        //     document.querySelector('#divBrandName').style.display = "none";
-        //     document.querySelector('#divInfo1').style.display = "none";
-        //     document.querySelector('#divInfo2').style.display = "none";
-        //     document.querySelector('#divTagline').style.display = "none";
-        //     document.querySelector('#divExtraImage').style.display = "none";
-        // }else if(footerSize == 5.6){
-        //     document.querySelector('#divBrandName').style.display = "block";
-        //     document.querySelector('#divInfo1').style.display = "none";
-        //     document.querySelector('#divInfo2').style.display = "none";
-        //     document.querySelector('#divTagline').style.display = "none";
-        //     document.querySelector('#divExtraImage').style.display = "none";
-        // }else if(footerSize == 8.4){
-        //     document.querySelector('#divBrandName').style.display = "block";
-        //     document.querySelector('#divInfo1').style.display = "block";
-        //     document.querySelector('#divInfo2').style.display = "none";
-        //     document.querySelector('#divTagline').style.display = "none";
-        //     document.querySelector('#divExtraImage').style.display = "none";
-        // }else if(footerSize == 12){
-        //     document.querySelector('#divBrandName').style.display = "block";
-        //     document.querySelector('#divInfo1').style.display = "block";
-        //     document.querySelector('#divInfo2').style.display = "block";
-        //     document.querySelector('#divTagline').style.display = "none";
-        //     document.querySelector('#divExtraImage').style.display = "none";
-        // }else if(footerSize == 14.8){
-        //     document.querySelector('#divBrandName').style.display = "block";
-        //     document.querySelector('#divInfo1').style.display = "block";
-        //     document.querySelector('#divInfo2').style.display = "block";
-        //     document.querySelector('#divTagline').style.display = "block";
-        //     document.querySelector('#divExtraImage').style.display = "none";
-        // }else if(footerSize == 17.6 || footerSize == '20.377'){
-        //     document.querySelector('#divBrandName').style.display = "block";
-        //     document.querySelector('#divInfo1').style.display = "block";
-        //     document.querySelector('#divInfo2').style.display = "block";
-        //     document.querySelector('#divTagline').style.display = "block";
-        //     document.querySelector('#divExtraImage').style.display = "block";
-        // }else{
-        //     document.querySelector('#divBrandName').style.display = "none";
-        //     document.querySelector('#divInfo1').style.display = "none";
-        //     document.querySelector('#divInfo2').style.display = "none";
-        //     document.querySelector('#divTagline').style.display = "none";
-        //     document.querySelector('#divExtraImage').style.display = "none";
-        // }
     }
     function quantityCalculate(element){
         removeInvalidClass(element);
@@ -400,6 +363,28 @@ let quantity = [
     function nameChange(element,id){
         removeInvalidClass(element);
         document.getElementById(id).innerHTML = element.value;
+    }
+    function infoFontChange(element){
+        fontChange(element,"fInfo1");
+        fontChange(element,"fInfo2");
+    }
+    function fontChange(element,id){
+        let lid = "l" + element.id.slice(0,-1);
+        for(let i=1;i<=6;i++){
+            if(document.getElementById(lid + i).classList.contains("tz-fontSize-Label-active")){
+                document.getElementById(lid + i).classList.remove("tz-fontSize-Label-active");
+            }
+        }
+        let alid = document.getElementById("l" + element.id);
+        alid.classList.add("tz-fontSize-Label-active");
+        let clss = "tz-footer-fontSize-"
+        id = document.getElementById(id);
+        for(let i=1;i<=6;i++){
+            if(id.classList.contains(clss+i)){
+                id.classList.remove(clss+i);
+            }
+        }
+        id.classList.add(clss+element.value);
     }
     function extraImageChange(){
         let extraImage = document.querySelector('#extraImage');
@@ -539,7 +524,7 @@ let quantity = [
             inputDict.price = ""
         }
         
-       console.log(inputDict);
+    //    console.log(inputDict);
         
     }
     function removeInvalidClass(element){
@@ -596,6 +581,7 @@ let quantity = [
         let info1 = document.querySelector('#info1');
         let info2 = document.querySelector('#info2');
         let extraImage = document.querySelector('#extraImage');
+        
         if(footerSize.value != "" && footerType1.checked == true && footerFile.files.length == 1){
             document.querySelector('#campaignForm3').style.display = "block";
             document.querySelector('#campaignForm4').style.display = "none";
@@ -666,11 +652,23 @@ let quantity = [
                 extraImage.value = "";
                 document.querySelector('#extraImageSpan').innerHTML = "Upload Image";
             }else if(size == "17.6" || size == "20.377" && logoFile.files.length == 1 && brandName.value != "" && tagline.value != "" && info1.value != "" && info2.value != "" && extraImage.files.length == 1){
-                document.querySelector('#campaignForm3').style.display = "block";
-                document.querySelector('#campaignForm4').style.display = "none";
-                document.querySelector('#campaignForm2').style.display = "none";
-                footerFile.value = "";
-                document.querySelector('#footerFileSpan').innerHTML = "Upload File";
+                html2canvas(document.querySelector('#footerContainer'),{
+                    onrendered: function(canvas){
+                        let imgFooter = canvas.toDataURL('image/png');
+                        let doc = new jsPDF('P','mm','a4');
+                        let width = 200.377;
+                        let height = 10;
+                        doc.addImage(imgFooter,'JPEG',3,3,width,height);
+                        // doc.save('Test.pdf');
+                        inputDict.footer = doc.output('blob');
+                        // console.log(inputDict.footer);
+                        document.querySelector('#campaignForm3').style.display = "block";
+                        document.querySelector('#campaignForm4').style.display = "none";
+                        document.querySelector('#campaignForm2').style.display = "none";
+                        footerFile.value = "";
+                        document.querySelector('#footerFileSpan').innerHTML = "Upload File";
+                    }
+                });
             }
             else{
                 if(size >= 2.8 && logoFile.files.length != 1){
@@ -705,6 +703,11 @@ let quantity = [
             }
         }        
     }
+    function goToStep3p(){
+        document.querySelector('#campaignForm3').style.display = "block";
+        document.querySelector('#campaignForm4').style.display = "none";
+        document.querySelector('#campaignForm2').style.display = "none";
+    }
     function goToStep4(){
         let quantity = document.querySelector('#quantity').value;
         if(quantity != ""){
@@ -718,10 +721,9 @@ let quantity = [
             document.querySelector('#spanFooterSize').innerHTML = inputDict.footerSize;
             document.querySelector('#spanQuantity').innerHTML = inputDict.quantity;
             document.querySelector('#spanPrice').innerHTML = inputDict.price;
-            document.querySelector('#campaignForm4').style.display = "block";
+            document.querySelector('#campaignForm4').style.display = "block";   
             document.querySelector('#campaignForm3').style.display = "none";
             document.querySelector('#campaignForm5').style.display = "none";
-            document.querySelector('#smallForm3').style.display = "none"
         }else{
             document.querySelector('#quantity').classList.add("is-invalid");
         }
@@ -732,7 +734,16 @@ let quantity = [
         document.querySelector('#campaignForm4').style.display = "none";
     }
     function payNow(){
-        window.location.href = "/campaignSuccess.html"
+        $.ajax({
+            url:pathname,
+            type:'post',
+            contentType: 'application/json; charset=utf-8',
+            data: inputDict,
+            dataType: 'json',
+            success: function(response){
+                window.location.href = "/campaignSuccess.html"
+            }
+        })
     }
 
     // Profile js
